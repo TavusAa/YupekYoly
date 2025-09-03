@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "866912114636",
+    "project_id": "beyik-yupek-yoly",
+    "storage_bucket": "beyik-yupek-yoly.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866912114636:android:964b0d6e434319d0aaef69",
+        "android_client_info": {
+          "package_name": "com.byy.yupekyolytm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866912114636-h6156h2bad2ncimb8o0rbiern70ad9oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byy.yupekyolytm",
+            "certificate_hash": "d77812660d85e633f7faa92da8417ee16be7b031"
+          }
+        },
+        {
+          "client_id": "866912114636-jv23hoa2qhtbf96k6htcklvri1lce87e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byy.yupekyolytm",
+            "certificate_hash": "8a0eb7f9a4049807c93fca7e48468acc7d9fdf9c"
+          }
+        },
+        {
+          "client_id": "866912114636-83sfevrb5u5r0i3dofpms465n1dr8a8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKdT9VVrYo0xsuUISQubMMuR9RebPQ2zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866912114636-83sfevrb5u5r0i3dofpms465n1dr8a8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
