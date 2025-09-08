@@ -97,8 +97,6 @@ class LoginScreenState extends State<SignUpMainScreen> {
     });
   }
 
-
-
   @override
   void dispose() {
     if (timer != null) {
@@ -140,10 +138,9 @@ class LoginScreenState extends State<SignUpMainScreen> {
 
     return AnnotatedRegion(
       value: UiUtils.getSystemUiOverlayStyle(
-        context: context,
-        statusBarColor: context.color.backgroundColor,
-          navigationBarColor: context.color.backgroundColor
-      ),
+          context: context,
+          statusBarColor: context.color.backgroundColor,
+          navigationBarColor: context.color.backgroundColor),
       child: SafeArea(
         top: false,
         bottom: Platform.isIOS,
@@ -174,8 +171,7 @@ class LoginScreenState extends State<SignUpMainScreen> {
                             context, Routes.main, {"from": "login"});
                       } else {
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            Routes.locationPermissionScreen,
-                            (route) => false);
+                            Routes.locationPermissionScreen, (route) => false);
                       }
                     } else {
                       Navigator.pushNamed(
@@ -200,11 +196,11 @@ class LoginScreenState extends State<SignUpMainScreen> {
                       Widgets.hideLoder(context);
 
                       if (state.type == AuthenticationType.phone) {
-                        if (Constant.otpServiceProvider == 'twilio') {
-                          context.read<LoginCubit>().loginWithTwilio(
-                              phoneNumber:
-                                  (state.payload as PhoneLoginPayload)
-                                      .phoneNumber,
+                        if (Constant.otpServiceProvider == 'twilio' ||
+                            Constant.otpServiceProvider == 'sms_server') {
+                          context.read<LoginCubit>().loginWithTwilioOrSmsServer(
+                              phoneNumber: (state.payload as PhoneLoginPayload)
+                                  .phoneNumber,
                               firebaseUserId:
                                   state.credential['id']?.toString() ?? '',
                               type: state.type.name,
@@ -213,9 +209,8 @@ class LoginScreenState extends State<SignUpMainScreen> {
                                   "+${(state.payload as PhoneLoginPayload).countryCode}");
                         } else {
                           context.read<LoginCubit>().login(
-                              phoneNumber:
-                                  (state.payload as PhoneLoginPayload)
-                                      .phoneNumber,
+                              phoneNumber: (state.payload as PhoneLoginPayload)
+                                  .phoneNumber,
                               firebaseUserId: state.credential.user!.uid,
                               type: state.type.name,
                               credential: state.credential,
@@ -351,8 +346,7 @@ class LoginScreenState extends State<SignUpMainScreen> {
 
   Widget buildLoginWidget() {
     return SingleChildScrollView(
-      padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       child: SizedBox(
         height: context.screenHeight - 50,
         child: Padding(

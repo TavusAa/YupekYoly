@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:eClassify/data/cubits/auth/authentication_cubit.dart';
@@ -121,8 +119,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-
-  void loginWithTwilio({
+  void loginWithTwilioOrSmsServer({
     required String phoneNumber,
     required String firebaseUserId,
     required String type,

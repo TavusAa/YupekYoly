@@ -46,7 +46,7 @@ class Api {
 
   //Twilio API
   static const String getTwilioOtp = 'get-otp';
-  static const String verifyTwilioOtp = 'verify-otp';
+  static const String verifyTwilioOrSmsServerOtp = 'verify-otp';
   static const String otp = 'otp';
 
   static const String _placeApiBaseUrl =

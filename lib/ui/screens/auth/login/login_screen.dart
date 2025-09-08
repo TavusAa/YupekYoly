@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
@@ -319,8 +320,10 @@ class LoginScreenState extends State<LoginScreen> {
                             countryCode: null);
                       }
                     } else if (state.type == AuthenticationType.phone) {
-                      if (Constant.otpServiceProvider == 'twilio') {
-                        context.read<LoginCubit>().loginWithTwilio(
+                      log('OtpserviceProvider::::${Constant.otpServiceProvider}');
+                      if (Constant.otpServiceProvider == 'twilio' ||
+                          Constant.otpServiceProvider == 'sms_server') {
+                        context.read<LoginCubit>().loginWithTwilioOrSmsServer(
                             phoneNumber: (state.payload as PhoneLoginPayload)
                                 .phoneNumber,
                             firebaseUserId:

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eClassify/data/model/system_settings_model.dart';
 import 'package:eClassify/data/repositories/system_repository.dart';
 import 'package:eClassify/settings.dart';
@@ -56,7 +58,9 @@ class FetchSystemSettingsCubit extends Cubit<FetchSystemSettingsState> {
 
       if (forceRefresh == true) {
         Map settings = await _systemRepository.fetchSystemSettings();
-        Constant.otpServiceProvider = _getSetting(settings, SystemSetting.otpServiceProvider);
+        Constant.otpServiceProvider =
+            _getSetting(settings, SystemSetting.otpServiceProvider);
+        log("Constant of OtpService Provider:::${Constant.otpServiceProvider}");
         Constant.mapProvider = _getSetting(settings, SystemSetting.mapProvider);
         Constant.currencySymbol =
             _getSetting(settings, SystemSetting.currencySymbol);
@@ -118,8 +122,10 @@ class FetchSystemSettingsCubit extends Cubit<FetchSystemSettingsState> {
       } else {
         if (state is! FetchSystemSettingsSuccess) {
           Map settings = await _systemRepository.fetchSystemSettings();
-          Constant.otpServiceProvider = _getSetting(settings, SystemSetting.otpServiceProvider);
-          Constant.mapProvider = _getSetting(settings, SystemSetting.mapProvider);
+          Constant.otpServiceProvider =
+              _getSetting(settings, SystemSetting.otpServiceProvider);
+          Constant.mapProvider =
+              _getSetting(settings, SystemSetting.mapProvider);
           Constant.currencySymbol =
               _getSetting(settings, SystemSetting.currencySymbol);
           Constant.maintenanceMode =
@@ -177,8 +183,10 @@ class FetchSystemSettingsCubit extends Cubit<FetchSystemSettingsState> {
           await CheckInternet.check(
             onInternet: () async {
               Map settings = await _systemRepository.fetchSystemSettings();
-              Constant.otpServiceProvider = _getSetting(settings, SystemSetting.otpServiceProvider);
-              Constant.mapProvider = _getSetting(settings, SystemSetting.mapProvider);
+              Constant.otpServiceProvider =
+                  _getSetting(settings, SystemSetting.otpServiceProvider);
+              Constant.mapProvider =
+                  _getSetting(settings, SystemSetting.mapProvider);
               Constant.currencySymbol =
                   _getSetting(settings, SystemSetting.currencySymbol);
               Constant.maintenanceMode =

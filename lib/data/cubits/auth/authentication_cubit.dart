@@ -80,9 +80,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         type!.name: payload!,
       });
 
-      if (Constant.otpServiceProvider == 'twilio' &&
+      if ((Constant.otpServiceProvider == 'twilio' ||
+              Constant.otpServiceProvider == 'sms_server') &&
           payload is PhoneLoginPayload) {
-        final twilio = await verifyTwilioOtp();
+        final twilio = await verifyTwilioOrSmsServerOtp();
         if (twilio['error'] == true) {
           emit(AuthenticationFail(twilio['message']));
         }
@@ -91,6 +92,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
         emit(AuthenticationSuccess(type!, credentials, payload!, token));
       } else {
+        log("else has been called");
         UserCredential? credential = await mMultiAuthentication.login();
 
         if (credential == null) {
@@ -125,15 +127,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
-  Future<Map<String, dynamic>> verifyTwilioOtp() async {
+  Future<Map<String, dynamic>> verifyTwilioOrSmsServerOtp() async {
     final parameters = {
       'number':
           "+${(payload as PhoneLoginPayload).countryCode}${(payload as PhoneLoginPayload).phoneNumber}",
       'otp': (payload as PhoneLoginPayload).getOTP(),
     };
 
-    final response =
-        await Api.get(url: Api.verifyTwilioOtp, queryParameters: parameters);
+    final response = await Api.get(
+        url: Api.verifyTwilioOrSmsServerOtp, queryParameters: parameters);
 
     return response;
   }

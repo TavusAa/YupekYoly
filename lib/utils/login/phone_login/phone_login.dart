@@ -35,9 +35,10 @@ class PhoneLogin extends LoginSystem {
   Future<void> requestVerification() async {
     emit(MOtpSendInProgress());
 
-    if (Constant.otpServiceProvider == 'twilio') {
+    if (Constant.otpServiceProvider == 'twilio' ||
+        Constant.otpServiceProvider == 'sms_server') {
       try {
-        await getTwilioOtp();
+        await sendOtp();
         super.requestVerification();
       } on ApiException catch (e) {
         emit(MFail(e.errorMessage));
@@ -69,7 +70,7 @@ class PhoneLogin extends LoginSystem {
         .then((value) {});
   }
 
-  Future<Map<String, dynamic>> getTwilioOtp() async {
+  Future<Map<String, dynamic>> sendOtp() async {
     phoneNumber = (payload as PhoneLoginPayload).countryCode +
         (payload as PhoneLoginPayload).phoneNumber;
     final parameters = {
